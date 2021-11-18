@@ -9,15 +9,20 @@ import java.util.List;
  * @project TDD_Athentication_and_Authorization_project
  */
 public class Login {
-    //private List<User> users = new ArrayList<>();
+    private List<User> users = new ArrayList<>();
 
-    /*public Login () {
+    public Login () {
         users.add(new User("anna", "losen"));
         users.add(new User("berit", "123456"));
-        users.add(new User("anna", "losen"));
-    }*/
+        users.add(new User("kalle", "password"));
+    }
 
-    public boolean login(String userName, String password) {
+    public boolean login (String userName, String password) {
+        for (int i = 0; i < users.size(); i++) {
+            if (users.get(i).getUserName().equals(userName) && users.get(i).getPassword().equals(password))
+                return true;
+        }
+
         return false;
     }
 }

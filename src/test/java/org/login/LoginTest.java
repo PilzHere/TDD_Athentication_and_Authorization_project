@@ -19,7 +19,7 @@ public class LoginTest {
     }
 
     @Test
-    void test_login() {
-        assertFalse(login.login("", ""));
+    void test_login () {
+        assertTrue(login.login("berit", "123456"));
     }
 }
