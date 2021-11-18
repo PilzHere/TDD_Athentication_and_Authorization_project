@@ -3,7 +3,8 @@ package org.login;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.login.utils.PasswordUtils.generateNewHashedPassword;
 
 /**
  * @author pilzhere
@@ -19,7 +20,12 @@ public class LoginTest {
     }
 
     @Test
-    void test_login () {
-        assertTrue(login.login("berit", "123456"));
+    void test_login_user_success () {
+        assertTrue(login.loginUser("berit", "123456"));
+    }
+
+    @Test
+    void test_generate_new_hashed_password_success () {
+        assertTrue(generateNewHashedPassword("losen"));
     }
 }

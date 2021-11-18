@@ -9,7 +9,7 @@ import java.util.List;
  * @project TDD_Athentication_and_Authorization_project
  */
 public class Login {
-    private List<User> users = new ArrayList<>();
+    private final List<User> users = new ArrayList<>();
 
     public Login () {
         users.add(new User("anna", "losen"));
@@ -17,10 +17,9 @@ public class Login {
         users.add(new User("kalle", "password"));
     }
 
-    public boolean login (String userName, String password) {
-        for (int i = 0; i < users.size(); i++) {
-            if (users.get(i).getUserName().equals(userName) && users.get(i).getPassword().equals(password))
-                return true;
+    public boolean loginUser (String userName, String password) {
+        for (User user : users) {
+            if (user.getUserName().equals(userName) && user.getPassword().equals(password)) return true;
         }
 
         return false;
