@@ -1,5 +1,14 @@
 package org.login;
 
+import com.auth0.jwt.JWT;
+import com.auth0.jwt.JWTCreator;
+import com.auth0.jwt.algorithms.Algorithm;
+import com.auth0.jwt.exceptions.JWTCreationException;
+import com.auth0.jwt.exceptions.SignatureGenerationException;
+import com.auth0.jwt.exceptions.SignatureVerificationException;
+import com.auth0.jwt.interfaces.DecodedJWT;
+
+import java.security.interfaces.RSAPublicKey;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,11 +26,20 @@ public class Login {
         users.add(new User("kalle", "password"));
     }
 
-    public boolean loginUser (String userName, String password) {
-        for (User user : users) {
-            if (user.getUserName().equals(userName) && user.getPassword().equals(password)) return true;
-        }
+    public String loginUser (String userName, String password) throws Exception {
+            for (User user : users) {
+                if (user.getUserName().equals(userName) && user.getPassword().equals(password)) {
+                    try {
+                        final Algorithm algorithm = Algorithm.HMAC256("secret");
+                        final String token = JWT.create().withIssuer("auth0").sign(algorithm);
+                        return token;
+                    } catch (JWTCreationException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
 
-        return false;
+            // User does not exist.
+            throw new Exception("User does not exist!");
     }
 }
