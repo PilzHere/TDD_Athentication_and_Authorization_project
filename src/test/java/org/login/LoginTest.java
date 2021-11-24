@@ -3,6 +3,7 @@ package org.login;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.login.utils.RightUtils;
 import org.token.TokenVerifier;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -39,5 +40,19 @@ public class LoginTest {
     @Test
     void test_generate_new_hashed_password_success () {
         assertTrue(generateNewHashedPassword("losen"));
+    }
+
+    @DisplayName ("test_get_user_rights successful")
+    @Test
+    void test_get_user_rights_success () throws Exception {
+        login.giveTokensToAllUsers();
+
+        for (User user: login.getUsers()) {
+            assertNotNull(RightUtils.getUserRights(user.getToken(), Resource.ACCOUNT));
+        }
+
+        for (User user: login.getUsers()) {
+            assertNotNull(RightUtils.getUserRights(user.getToken(), Resource.PROVISION_CALC));
+        }
     }
 }

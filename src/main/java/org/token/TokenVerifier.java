@@ -19,8 +19,9 @@ public class TokenVerifier {
                     .withIssuer("auth0")
                     .build(); //Reusable verifier instance
             DecodedJWT jwt = verifier.verify(token);
+            if (jwt.getToken() != null && token.equals(jwt.getToken()))
+                return true;
 
-            return true;
         } catch (JWTVerificationException exception){
             //Invalid signature/claims
             exception.printStackTrace();
