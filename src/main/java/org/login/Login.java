@@ -31,7 +31,7 @@ public class Login {
                 if (user.getUserName().equals(userName) && user.getPassword().equals(password)) {
                     try {
                         final Algorithm algorithm = Algorithm.HMAC256("secret");
-                        final String token = JWT.create().withIssuer("auth0").sign(algorithm);
+                        final String token = JWT.create().withIssuer("auth0").withClaim("name", userName).sign(algorithm);
                         return token;
                     } catch (JWTCreationException e) {
                         e.printStackTrace();
