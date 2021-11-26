@@ -33,14 +33,6 @@ public class LoginTest {
         );
     }
 
-    static Stream<Arguments> testDataUsers () {
-        return Stream.of(
-                Arguments.of("anna", "losen"),
-                Arguments.of("berit", "123456"),
-                Arguments.of("kalle", "password")
-        );
-    }
-
     @BeforeEach
     void setUp () {
         login = new Login();
