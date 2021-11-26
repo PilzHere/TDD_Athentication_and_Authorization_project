@@ -3,8 +3,13 @@ package org.login;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.MethodSource;
 import org.login.utils.RightUtils;
 import org.token.TokenVerifier;
+
+import java.util.stream.Stream;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.login.utils.PasswordUtils.generateNewHashedPassword;
@@ -17,22 +22,34 @@ import static org.login.utils.PasswordUtils.generateNewHashedPassword;
 public class LoginTest {
     private Login login;
 
+    static Stream<Arguments> testDataUsers() {
+        return Stream.of(
+                Arguments.of("anna", "losen", UserRights.READ, UserRights.READ_WRITE_EXECUTE),
+                Arguments.of("berit", "123456", UserRights.READ, UserRights.WRITE),
+                Arguments.of("kalle", "password", UserRights.WRITE, UserRights.WRITE_EXECUTE)
+        );
+    }
+
     @BeforeEach
     void setUp () {
         login = new Login();
+        login.addUsers("anna", "losen", UserRights.READ, UserRights.READ_WRITE_EXECUTE);
+        login.addUsers("berit", "123456", UserRights.READ, UserRights.WRITE);
+        login.addUsers("kalle", "password", UserRights.WRITE, UserRights.WRITE_EXECUTE);
+        login.updateUsersRightUtils();
     }
 
     @DisplayName ("test_login_user_success successful")
-    @Test
-    void test_login_user_success () {
-        String userName = "berit", password = "123456";
+    @ParameterizedTest
+    @MethodSource ("testDataUsers")
+    void test_login_user_success (String userName, String password) {
         assertDoesNotThrow(() -> login.loginUser(userName, password));
     }
 
     @DisplayName ("test_verify_token_success successful")
-    @Test
-    void test_verify_token_success () throws Exception {
-        String userName = "berit", password = "123456";
+    @ParameterizedTest
+    @MethodSource ("testDataUsers")
+    void test_verify_token_success (String userName, String password) throws Exception {
         assertTrue(TokenVerifier.verifyToken(login.loginUser(userName, password)));
     }
 
@@ -47,11 +64,11 @@ public class LoginTest {
     void test_get_user_rights_success () throws Exception {
         login.giveTokensToAllUsers();
 
-        for (User user: login.getUsers()) {
+        for (User user : login.getUsers()) {
             assertNotNull(RightUtils.getUserRights(user.getToken(), Resource.ACCOUNT));
         }
 
-        for (User user: login.getUsers()) {
+        for (User user : login.getUsers()) {
             assertNotNull(RightUtils.getUserRights(user.getToken(), Resource.PROVISION_CALC));
         }
     }

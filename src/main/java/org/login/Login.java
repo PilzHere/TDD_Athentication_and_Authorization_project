@@ -22,11 +22,13 @@ import java.util.List;
 public class Login {
     private final List<User> users = new ArrayList<>();
 
-    public Login () {
-        users.add(new User("anna", "losen", UserRights.READ, UserRights.READ_WRITE_EXECUTE));
-        users.add(new User("berit", "123456", UserRights.READ, UserRights.WRITE));
-        users.add(new User("kalle", "password", UserRights.WRITE, UserRights.WRITE_EXECUTE));
+    public Login () { }
 
+    public void addUsers(String username, String password, UserRights accountRights, UserRights provisionCalcRights) {
+        users.add(new User(username, password, accountRights, provisionCalcRights));
+    }
+
+    public void updateUsersRightUtils() {
         RightUtils.setUsers(users);
     }
 
