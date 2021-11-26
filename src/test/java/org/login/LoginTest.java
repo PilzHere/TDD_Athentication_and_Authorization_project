@@ -33,12 +33,22 @@ public class LoginTest {
         );
     }
 
+    static Stream<Arguments> testDataUsers () {
+        return Stream.of(
+                Arguments.of("anna", "losen"),
+                Arguments.of("berit", "123456"),
+                Arguments.of("kalle", "password")
+        );
+    }
+
     @BeforeEach
     void setUp () {
         login = new Login();
+      
         login.addUser("anna", "losen", UserRights.READ, UserRights.READ_WRITE_EXECUTE);
         login.addUser("berit", "123456", UserRights.READ, UserRights.WRITE);
         login.addUser("kalle", "password", UserRights.WRITE, UserRights.WRITE_EXECUTE);
+      
         login.updateUsersRightUtils();
     }
 

@@ -4,8 +4,8 @@ import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.exceptions.JWTCreationException;
 import org.rights.utils.RightUtils;
-import org.user.User;
 import org.rights.UserRights;
+import org.user.User;
 
 import java.util.ArrayList;
 import java.util.List;
