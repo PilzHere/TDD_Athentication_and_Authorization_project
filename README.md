@@ -6,13 +6,13 @@ A school project.
 (uträkning och verifiering)
 
 #### Iterationer = 65 536
-* HMAC-SHA512 = 387 ms
-* HMAC-SHA384 = 309 ms
+* HMAC-SHA512 = 387 ms +36.75%
+* HMAC-SHA384 = 309 ms +9.2%
 * HMAC-SHA265 = 283 ms
 
 #### Iterationer = 655 360
-* HMAC-SHA512 = 2s 123ms
-* HMAC-SHA384 = 1s 833 ms
+* HMAC-SHA512 = 2s 123ms +47%
+* HMAC-SHA384 = 1s 833 ms +27%
 * HMAC-SHA265 = 1s 444 ms
 
 Jag kommer inte på något sätt att optimera... så här kommer en förklaring hur jag skulle ha använt mig av detta till en login-system applikation.
