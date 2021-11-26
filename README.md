@@ -1,6 +1,4 @@
 # TDD_Athentication_and_Authorization_project
-A school project.
-
 ## Tester
 ### Utan någon uppvärmning:
 (uträkning och verifiering)
@@ -17,7 +15,7 @@ A school project.
 
 ## Hur jag hade använt hashing i ett login-system:
 Jag kommer inte på något sätt att optimera... så här kommer en förklaring hur jag skulle ha använt mig av detta till en login-system applikation.
-(rätta mig gärna om jag har fel)
+*(rätta mig gärna om jag har fel)*
 
 * HMAC är algoritmen som ska användas.
 * 256 -> 512 är hur många symboler hashen ska innehålla. Större tal -> svårare att räkna ut och tar längre tid. Påverkar inte tiden lika mycket som Iterationer gör.
