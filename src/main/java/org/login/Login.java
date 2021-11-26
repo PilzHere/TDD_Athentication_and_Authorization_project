@@ -1,5 +1,7 @@
 package org.login;
 
+import org.user.User;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -11,10 +13,10 @@ import java.util.List;
 public class Login {
     private List<User> users = new ArrayList<>();
 
-    public Login () {
-        users.add(new User("anna", "losen"));
-        users.add(new User("berit", "123456"));
-        users.add(new User("kalle", "password"));
+    public Login () { }
+
+    public void addUser(String username, String password) {
+        users.add(new User(username, password));
     }
 
     public boolean login (String userName, String password) {
