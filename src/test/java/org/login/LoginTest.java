@@ -6,8 +6,11 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
-import org.login.utils.RightUtils;
+import org.resource.Resource;
+import org.rights.utils.RightUtils;
 import org.token.TokenVerifier;
+import org.user.User;
+import org.rights.UserRights;
 
 import java.util.stream.Stream;
 
@@ -33,9 +36,9 @@ public class LoginTest {
     @BeforeEach
     void setUp () {
         login = new Login();
-        login.addUsers("anna", "losen", UserRights.READ, UserRights.READ_WRITE_EXECUTE);
-        login.addUsers("berit", "123456", UserRights.READ, UserRights.WRITE);
-        login.addUsers("kalle", "password", UserRights.WRITE, UserRights.WRITE_EXECUTE);
+        login.addUser("anna", "losen", UserRights.READ, UserRights.READ_WRITE_EXECUTE);
+        login.addUser("berit", "123456", UserRights.READ, UserRights.WRITE);
+        login.addUser("kalle", "password", UserRights.WRITE, UserRights.WRITE_EXECUTE);
         login.updateUsersRightUtils();
     }
 

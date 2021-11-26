@@ -1,10 +1,9 @@
-package org.login.utils;
+package org.rights.utils;
 
-import org.login.Resource;
-import org.login.User;
-import org.login.UserRights;
+import org.resource.Resource;
+import org.rights.UserRights;
+import org.user.User;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**

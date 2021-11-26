@@ -1,4 +1,6 @@
-package org.login;
+package org.user;
+
+import org.rights.UserRights;
 
 /**
  * @author pilzhere

@@ -1,16 +1,12 @@
 package org.login;
 
 import com.auth0.jwt.JWT;
-import com.auth0.jwt.JWTCreator;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.exceptions.JWTCreationException;
-import com.auth0.jwt.exceptions.SignatureGenerationException;
-import com.auth0.jwt.exceptions.SignatureVerificationException;
-import com.auth0.jwt.interfaces.Claim;
-import com.auth0.jwt.interfaces.DecodedJWT;
-import org.login.utils.RightUtils;
+import org.rights.utils.RightUtils;
+import org.user.User;
+import org.rights.UserRights;
 
-import java.security.interfaces.RSAPublicKey;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -24,7 +20,7 @@ public class Login {
 
     public Login () { }
 
-    public void addUsers(String username, String password, UserRights accountRights, UserRights provisionCalcRights) {
+    public void addUser (String username, String password, UserRights accountRights, UserRights provisionCalcRights) {
         users.add(new User(username, password, accountRights, provisionCalcRights));
     }
 

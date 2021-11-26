@@ -1,4 +1,4 @@
-package org.login;
+package org.rights;
 
 /**
  * @author pilzhere
