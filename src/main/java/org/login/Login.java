@@ -1,14 +1,10 @@
 package org.login;
 
 import com.auth0.jwt.JWT;
-import com.auth0.jwt.JWTCreator;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.exceptions.JWTCreationException;
-import com.auth0.jwt.exceptions.SignatureGenerationException;
-import com.auth0.jwt.exceptions.SignatureVerificationException;
-import com.auth0.jwt.interfaces.DecodedJWT;
+import org.user.User;
 
-import java.security.interfaces.RSAPublicKey;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -20,10 +16,10 @@ import java.util.List;
 public class Login {
     private final List<User> users = new ArrayList<>();
 
-    public Login () {
-        users.add(new User("anna", "losen"));
-        users.add(new User("berit", "123456"));
-        users.add(new User("kalle", "password"));
+    public Login () { }
+
+    public void addUser(String userName, String password) {
+        users.add(new User(userName, password));
     }
 
     public String loginUser (String userName, String password) throws Exception {
