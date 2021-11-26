@@ -15,7 +15,7 @@ A school project.
 * HMAC-SHA384 = 1s 833 ms
 * HMAC-SHA265 = 1s 444 ms
 
-Jag kommer inte på något sätt att optimera... så här kommer en förklaring hur jag hade använt mig av detta till ett login-system för en server.
+Jag kommer inte på något sätt att optimera... så här kommer en förklaring hur jag skulle ha använt mig av detta till en login-system applikation.
 
 ## Hur man använder i ett login-system:
 (rätta mig gärna om jag har fel)
