@@ -10,6 +10,8 @@ import org.rights.UserRights;
 public class User {
     private String userName;
     private String password;
+    private String salt;
+
     private String token;
 
     private UserRights accountRights;
@@ -22,6 +24,14 @@ public class User {
 
     public User (String userName, String password, UserRights accountRights, UserRights provisionRights) {
         this.userName = userName;
+        this.password = password;
+        this.accountRights = accountRights;
+        this.provisionRights = provisionRights;
+    }
+
+    public User (String userName, String salt, String password, UserRights accountRights, UserRights provisionRights) {
+        this.userName = userName;
+        this.salt = salt;
         this.password = password;
         this.accountRights = accountRights;
         this.provisionRights = provisionRights;
@@ -49,5 +59,13 @@ public class User {
 
     public UserRights getProvisionRights () {
         return provisionRights;
+    }
+
+    public String getSalt () {
+        return salt;
+    }
+
+    public void setSalt (String salt) {
+        this.salt = salt;
     }
 }
