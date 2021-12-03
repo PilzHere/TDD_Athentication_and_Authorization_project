@@ -15,27 +15,86 @@ import java.util.Optional;
  * @project TDD_Athentication_and_Authorization_project
  */
 public class PasswordUtils {
-    public static boolean generateNewHashedPassword (String password) {
+    /*public static boolean generateNewHashedPassword (String password) {
         final String salt = generateSalt(512).get();
         final String key = hashPassword(password, salt).get();
 
         return verifyPassword(password, key, salt);
+    }*/
+
+    public static String generateNewHashedPassword (String salt, String password) {
+        final String key = hashPassword512(password, salt).get();
+
+        //return verifyPassword(password, key, salt);
+
+        return key;
     }
 
-    private static final int ITERATIONS = 65536;
-    private static final int KEY_LENGTH = 512;
-    private static final String ALGORITHM = "PBKDF2WithHmacSHA512";
+    private static final int ITERATIONS = (int) (65536 * Math.PI);
 
-    public static Optional<String> hashPassword (String password, String salt) {
+    public static Optional<String> hashPassword512 (String password, String salt) {
         char[] chars = password.toCharArray();
         byte[] bytes = salt.getBytes();
 
-        PBEKeySpec spec = new PBEKeySpec(chars, bytes, ITERATIONS, KEY_LENGTH);
+        final int keyLength = 512;
+        final String algo = "PBKDF2WithHmacSHA512";
+
+        PBEKeySpec spec = new PBEKeySpec(chars, bytes, ITERATIONS, keyLength);
 
         Arrays.fill(chars, Character.MIN_VALUE);
 
         try {
-            SecretKeyFactory fac = SecretKeyFactory.getInstance(ALGORITHM);
+            SecretKeyFactory fac = SecretKeyFactory.getInstance(algo);
+            byte[] securePassword = fac.generateSecret(spec).getEncoded();
+            return Optional.of(Base64.getEncoder().encodeToString(securePassword));
+
+        } catch (NoSuchAlgorithmException | InvalidKeySpecException ex) {
+            System.err.println("Exception encountered in hashPassword()");
+            return Optional.empty();
+
+        } finally {
+            spec.clearPassword();
+        }
+    }
+
+    public static Optional<String> hashPassword384 (String password, String salt) {
+        char[] chars = password.toCharArray();
+        byte[] bytes = salt.getBytes();
+
+        final int keyLength = 384;
+        final String algo = "PBKDF2WithHmacSHA384";
+
+        PBEKeySpec spec = new PBEKeySpec(chars, bytes, ITERATIONS, keyLength);
+
+        Arrays.fill(chars, Character.MIN_VALUE);
+
+        try {
+            SecretKeyFactory fac = SecretKeyFactory.getInstance(algo);
+            byte[] securePassword = fac.generateSecret(spec).getEncoded();
+            return Optional.of(Base64.getEncoder().encodeToString(securePassword));
+
+        } catch (NoSuchAlgorithmException | InvalidKeySpecException ex) {
+            System.err.println("Exception encountered in hashPassword()");
+            return Optional.empty();
+
+        } finally {
+            spec.clearPassword();
+        }
+    }
+
+    public static Optional<String> hashPassword256 (String password, String salt) {
+        char[] chars = password.toCharArray();
+        byte[] bytes = salt.getBytes();
+
+        final int keyLength = 256;
+        final String algo = "PBKDF2WithHmacSHA256";
+
+        PBEKeySpec spec = new PBEKeySpec(chars, bytes, ITERATIONS, keyLength);
+
+        Arrays.fill(chars, Character.MIN_VALUE);
+
+        try {
+            SecretKeyFactory fac = SecretKeyFactory.getInstance(algo);
             byte[] securePassword = fac.generateSecret(spec).getEncoded();
             return Optional.of(Base64.getEncoder().encodeToString(securePassword));
 
@@ -64,7 +123,7 @@ public class PasswordUtils {
     }
 
     public static boolean verifyPassword (String password, String key, String salt) {
-        Optional<String> optEncrypted = hashPassword(password, salt);
+        Optional<String> optEncrypted = hashPassword512(password, salt);
         if (!optEncrypted.isPresent()) return false;
         return optEncrypted.get().equals(key);
     }

@@ -1,5 +1,6 @@
 package org.rights.utils;
 
+import com.auth0.jwt.JWT;
 import org.resource.Resource;
 import org.rights.UserRights;
 import org.user.User;
@@ -19,8 +20,10 @@ public class RightUtils {
     }
 
     public static UserRights getUserRights(String token, Resource resource) {
+        String userName = JWT.decode(token).getClaim("name").asString();
+
         for (User user: users) {
-            if (user.getToken().equals(token)) {
+            if (user.getUserName().equals(userName)) {
                 System.out.print(user.getUserName());
                 switch (resource) {
                     case ACCOUNT:

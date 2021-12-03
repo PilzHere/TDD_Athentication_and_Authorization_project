@@ -29,4 +29,23 @@ public class TokenVerifier {
 
         return false;
     }
+
+    // TEST
+    public static boolean verifyToken(String token, Algorithm algo) {
+        try {
+            //Algorithm algorithm = Algorithm.HMAC256("secret");
+            JWTVerifier verifier = JWT.require(algo)
+                    .withIssuer("auth0")
+                    .build(); //Reusable verifier instance
+            DecodedJWT jwt = verifier.verify(token);
+            if (jwt.getToken() != null && token.equals(jwt.getToken()))
+                return true;
+
+        } catch (JWTVerificationException exception){
+            //Invalid signature/claims
+            exception.printStackTrace();
+        }
+
+        return false;
+    }
 }
