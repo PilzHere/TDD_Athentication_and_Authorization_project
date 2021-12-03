@@ -1,26 +1,23 @@
 # TDD_Athentication_and_Authorization_project
 ## Tester
-  
 ### Utan någon uppvärmning:
-(uträkning och verifiering)
-
 ##### Iterationer: 65 536
 | algoritm | tid | ökning i procent |
 | ------------- | ------------- | ------------- |
-| HMAC-SHA**512** | 387 ms | **+36.75%** |
-| HMAC-SHA**384** | 309 ms | **+9.2%** |
-| HMAC-SHA**265** | 283 ms | |
+| HMAC-SHA**512** | 44s 46ms | **+22.08%** |
+| HMAC-SHA**384** | 41s 982ms | **+15.12%** |
+| HMAC-SHA**265** | 36s 42ms | |
 
-##### Iterationer: 655 360
+##### Iterationer: 65 536 * Pi
 | algoritm | tid | ökning i procent |
 | ------------- | ------------- | ------------- |
-| HMAC-SHA**512** | 2s 123 ms | **+47%** |
-| HMAC-SHA**384** | 1s 833 ms | **+27%** |
-| HMAC-SHA**265** | 1 444 ms | |
+| HMAC-SHA**512** | 2m 6s | **+16.67%** |
+| HMAC-SHA**384** | 2m 10s | **+20.37%** |
+| HMAC-SHA**265** | 1m 48s | |
   
 &nbsp;&nbsp;
 ## Hur jag hade använt hashing i ett login-system:
-Jag kommer inte på något sätt att optimera... så här kommer en förklaring hur jag skulle ha använt mig av detta till en login-system applikation.
+Här kommer en förklaring hur jag skulle ha använt mig av detta till en login-system applikation.
   
 *(rätta mig gärna om jag har fel)*
 
